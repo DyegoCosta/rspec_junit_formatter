@@ -21,10 +21,11 @@ private
 
   def example_group_file_path_for(example)
     meta = example.metadata
+    line_number = meta[:line_number]
     while meta[:example_group]
       meta = meta[:example_group]
     end
-    meta[:file_path]
+    "#{meta[:file_path]}:#{line_number}"
   end
 
   def classname_for(example)
