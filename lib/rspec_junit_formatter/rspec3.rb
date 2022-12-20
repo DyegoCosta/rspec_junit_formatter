@@ -64,12 +64,13 @@ private
     while parent_metadata = metadata[:parent_example_group]
       metadata = parent_metadata
     end
-    "#{metadata[:file_path]}:#{line_number}"
+    "#{metadata[:file_path]}\\:#{line_number}"
   end
 
   def classname_for(notification)
     fp = example_group_file_path_for(notification)
-    fp.sub(%r{\.[^/]*\Z}, "").gsub("/", ".").gsub(%r{\A\.+|\.+\Z}, "")
+    fp.sub(%r{\.[^/]*\Z}, "").gsub("/", ".").gsub(%r{\A\.+|\.+\Z}, "") +
+      "_#{notification.example.metadata[:line_number]}"
   end
 
   def duration_for(notification)
